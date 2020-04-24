@@ -1,0 +1,163 @@
+  <TRACK {6fbf3a12-e37a-42ee-8ecd-72f1bc4c8fd6}
+    NAME ""
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 1
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {6fbf3a12-e37a-42ee-8ecd-72f1bc4c8fd6}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+      <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {75B72E42-4717-4C56-B0ED-097263F6052F}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {644EC167-52E5-451F-8C8C-63E70F1E43B8}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
+    <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {77277B46-1B28-4338-8EEA-99AE1E1D058A}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {DEB7F48F-E12D-4B36-B463-8A3D09493AC2}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
+    <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {3840ED85-DCB3-4886-A060-9A25B4BF9FC7}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {D2CFBD7B-8045-4872-96E3-DA1641A02E07}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
+    <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {21101093-779A-4D90-B295-EB9E381D3C0D}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {B344E323-DC2B-4EDD-AF73-8D45938487ED}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
+    <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {A3407D70-98EF-4DD6-973F-83B04F9EC48D}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {4052E1D1-5DA9-49ED-8C38-D5F3B7C45178}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
+    <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {93A14E7B-8603-46CF-8A2D-14FE5460EC0D}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {6E5B22C6-5738-458F-87D4-0F3D9719A552}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
+>

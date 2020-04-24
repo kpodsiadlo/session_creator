@@ -1,0 +1,23 @@
+    <ITEM
+          POSITION 1
+          SNAPOFFS 0
+          LENGTH 7.8678231292517
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {F9272F36-F65A-372D-7C37-B4DA03F56542}
+          IID 1
+          NAME 01-200423_0205.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {F51042FE-6BFC-093D-4F1C-5DFAE7F85E47}
+          RECPASS 1
+          <SOURCE WAVE
+            FILE "01-200423_0205.wav"
+          >
+    >
