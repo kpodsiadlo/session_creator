@@ -1,8 +1,11 @@
 from uuid import uuid4
 import os
 from wavefile import Wavefile
+from pprint import pprint
+from collections import defaultdict
 
-def create_track():
+def create_empty_track():
+    """Creates a track string"""
     id = str(uuid4()).upper()
 
     with open('track.txt', 'r') as f:
@@ -15,36 +18,46 @@ def create_track():
     return new_track
 
 
-def create_item():
+def create_all_items(wavefiles, distance):
+    "Create a string represeting all the files in project "
+    position = 1
+    items = ""
+    for wavefile in wavefiles:
+        items += create_item(wavefile, position)
+        position += (wavefile.length_in_seconds +
+                    distance *wavefile.length_in_seconds)
+
+    return items
+
+
+def create_item(wavefile, position):
+    """Create a string representing a file"""
     iguid = str(uuid4()).upper()
     guid = str(uuid4()).upper()
 
     with open('item.txt', 'r') as f:
         item = f.readlines()
-        item[10] = "          IGUID {{{iguid}}}\n"
-        item[17] = "          GUID {{{guid}}}]n"
-
+        item[1] =  f"          POSITION {position}"
+        item[3]  = f"          LENGTH {wavefile.length_in_seconds}\n"
+        item[10] = f"          IGUID {{{iguid}}}\n"
+        item[12] = f"          NAME {wavefile.name}\n"
+        item[17] = f"          GUID {{{guid}}}]\n"
+        item[20] = f'           FILE "{wavefile.name}"\n'
     new_item = "".join(item)
-
     return new_item
 
 
-def create_track_with_items(items): #items = list:
-    track = create_track()
-    for item in items:
-        print(item)
-        track = track[:-2] + item + track[-2:]
-        print(len(track))
+def create_track_with_items(items): #items = string:
+    track = create_empty_track()
+    track = track[:-2] + items + track[-2:]
     return track
+
 
 def create_project(track, filename):
     with open('skeleton.txt') as f:
         skeleton = f.read()
-
     project = skeleton[:-2] + track + skeleton [-2:]
-
-    with open(filename, 'w') as f:
-        f.write(project)
+    return project
 
 
 def get_wave_filenames_from_directory(directory='./audio'):
@@ -52,11 +65,63 @@ def get_wave_filenames_from_directory(directory='./audio'):
     wav_files = [file for file in filenames if file[-4:] == '.wav']
     return filenames, wav_files
 
-def read_waves(directory, wav_files):
 
-    wave_object_list = []
+def get_list_of_wavefiles(directory, wav_files):
+    """Reads the list of wave files in the directory and returns a list of
+    Wavefiles (class with properties of the wave file)"""
+    wave_objects_list = []
     for filename in wav_files:
-        path = directory + filename
-        wave_object_list.append(Wavefile(path))
+        wave_objects_list.append(Wavefile(directory, filename))
+    return wave_objects_list
 
-    return wave_object_list
+
+def audit(wave_objects_list):
+    data = {}
+    for wavefile in wave_objects_list:
+        (filename, channels, sampwidth,
+                    framerate, length_in_seconds) = wavefile.get_info()
+
+        data[filename] = {'channels': channels,
+                        'sampwidth': sampwidth,
+                        'framerate':framerate,
+                        'length_in_seconds':length_in_seconds}
+
+        # audit przypisz default dict. Lambda, bo musi być funkcja
+        # jako parametr do defaultdict. List, bo cośtam
+    audit = defaultdict(lambda: defaultdict(list))
+    for file, pv_dict in data.items():
+        for parameter, value in pv_dict.items():
+            audit[parameter][value].append(file)
+
+    pprint(dict(audit))
+
+
+
+
+
+
+
+#generate list of all channel, samplerate and framerate types in the dictionary:
+"""    channel_types = set()
+    sampwidth_types = set()
+    framerate_types = set()
+
+    for parameters in data.values():
+        channel_types.add(parameters['channels'])
+        sampwidth_types.add(parameters['sampwidth'])
+        framerate_types.add(parameters['framerate'])
+
+
+    audit = {}
+    for type in channel_types:
+        list_of_files = []
+        print(data.items()  )
+        for key, value in data.items():
+            if value['channels'] == type:
+                list_of_files.append(key)
+            audit['channels'] = {type: list_of_files}
+
+
+    pprint(data)
+    pprint(audit)
+    pprint(channel_types)"""

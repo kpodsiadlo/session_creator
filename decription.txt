@@ -9,11 +9,6 @@ wczytaj listę plików z zadanego folderu
 wczytaj tylko pliki .wav
 sprawdz dlugosc plikow wav
 
-
-
-
-
-
 1) wczytaj pliki z zadanego katalogu, sprawdź ich długość,
 stwórz sesję reapera. ustaw przerwę między plikami na 2x długość pliku.
 
