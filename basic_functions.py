@@ -53,20 +53,33 @@ def create_track_with_items(items): #items = string:
     return track
 
 
-def create_project(track, filename):
+def create_project(track):
     with open('skeleton.txt') as f:
         skeleton = f.read()
     project = skeleton[:-2] + track + skeleton [-2:]
     return project
 
 
-def get_wave_filenames_from_directory(directory='./audio'):
+def generate_reaper_project(wavefiles, distance):
+    items = create_all_items(wavefiles, distance)
+    track = create_track_with_items(items)
+    project = create_project(track)
+    return project
+
+
+def get_all_and_wave_filenames_from_directory(directory='./audio'):
     filenames = os.listdir(directory)
     wav_files = [file for file in filenames if file[-4:] == '.wav']
     return filenames, wav_files
 
 
-def get_list_of_wavefiles(directory, wav_files):
+def write_filenames(files):
+    with open('list_of_files.txt', 'w') as f:
+        for name_of_wav in files:
+            f.write(name_of_wav + '\n')
+
+
+def get_wavefile_objects(directory, wav_files):
     """Reads the list of wave files in the directory and returns a list of
     Wavefiles (class with properties of the wave file)"""
     wave_objects_list = []
@@ -75,7 +88,8 @@ def get_list_of_wavefiles(directory, wav_files):
     return wave_objects_list
 
 
-def audit(wave_objects_list):
+def generate_audit(wave_objects_list):
+    """Generate a dictionary with wav file parameters as keys"""
     data = {}
     for wavefile in wave_objects_list:
         (filename, channels, sampwidth,
@@ -86,42 +100,72 @@ def audit(wave_objects_list):
                         'framerate':framerate,
                         'length_in_seconds':length_in_seconds}
 
-        # audit przypisz default dict. Lambda, bo musi być funkcja
-        # jako parametr do defaultdict. List, bo cośtam
+    """create a defaultdict, taking as default result of a function
+    returinng a defaultdict that takes as default result of a function
+    returning an empty list
+    """
     audit = defaultdict(lambda: defaultdict(list))
     for file, pv_dict in data.items():
         for parameter, value in pv_dict.items():
             audit[parameter][value].append(file)
 
     pprint(dict(audit))
+    return audit
 
 
+def check_if_the_files_are_the_same(audit):
+    """Check if all the files have the same frequency, bitrate and number of
+     channels."""
+
+    # for lenth of the files
+    not_matching_parameters = []
+    for parameter in audit.keys():
+
+        if parameter == 'length_in_seconds':
+            long_files_and_lenghts = look_for_long_files(audit, parameter)
+
+        else:
+            #sprawdz czy wszystkie pliki sa takie same.
+            if len(set(audit[parameter].keys())) == 1:
+                print(f'All files have the same {parameter}')
+            else:
+                print(f'Not all the files have the same {parameter}')
+                not_matching_parameters.append(parameter)
+
+    return not_matching_parameters, long_files_and_lenghts
 
 
+def look_for_long_files(audit, parameter):
+    long_files_and_lenghts = []
+    for length_in_seconds in audit[parameter]:
+        if length_in_seconds > 4:
+            long_files_and_lenghts.append((audit[parameter][length_in_seconds],
+            length_in_seconds))
+
+            #long_files_and_lenghts.append()
+    return long_files_and_lenghts
 
 
+def import_list_of_files(filename):
+    files = []
+    with open(filename) as f:
+        for line in f:
+            files.append(line.rstrip())
 
-#generate list of all channel, samplerate and framerate types in the dictionary:
-"""    channel_types = set()
-    sampwidth_types = set()
-    framerate_types = set()
-
-    for parameters in data.values():
-        channel_types.add(parameters['channels'])
-        sampwidth_types.add(parameters['sampwidth'])
-        framerate_types.add(parameters['framerate'])
+    return files
 
 
-    audit = {}
-    for type in channel_types:
-        list_of_files = []
-        print(data.items()  )
-        for key, value in data.items():
-            if value['channels'] == type:
-                list_of_files.append(key)
-            audit['channels'] = {type: list_of_files}
+def compare_list_and_wave_files_in_directory(files_to_load, wav_files):
+    """Return list of required files not present in directory and list of
+    files in the directory not present in the list of required"""
+    missing_files = set(files_to_load) - set(wav_files)
+    extra_files = set(wav_files) - set(files_to_load)
+    return list(missing_files), list(extra_files)
 
 
-    pprint(data)
-    pprint(audit)
-    pprint(channel_types)"""
+def print_missing_and_extra_files(missing_files, extra_files, directory):
+    if len(missing_files) != 0:
+        print(f"The following files are missing in ''{directory}': {missing_files}")
+    if len(extra_files) != 0:
+        print(f"The following files found in {directory}' folder "
+        f"are not on the list: {extra_files}")
