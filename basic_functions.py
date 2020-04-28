@@ -4,6 +4,7 @@ from wavefile import Wavefile
 from pprint import pprint
 from collections import defaultdict
 
+
 def create_empty_track():
     """Creates a track string"""
     id = str(uuid4()).upper()
@@ -89,7 +90,7 @@ def get_wavefile_objects(directory, wav_files):
 
 
 def generate_audit(wave_objects_list):
-    """Generate a dictionary with wav file parameters as keys"""
+    """Generate a dictionary with wav file parameters as keys."""
     data = {}
     for wavefile in wave_objects_list:
         (filename, channels, sampwidth,
@@ -100,7 +101,7 @@ def generate_audit(wave_objects_list):
                         'framerate':framerate,
                         'length_in_seconds':length_in_seconds}
 
-    """create a defaultdict, taking as default result of a function
+    """Create a defaultdict, taking as default result of a function
     returinng a defaultdict that takes as default result of a function
     returning an empty list
     """
@@ -109,7 +110,7 @@ def generate_audit(wave_objects_list):
         for parameter, value in pv_dict.items():
             audit[parameter][value].append(file)
 
-    pprint(dict(audit))
+    #pprint(dict(audit))
     return audit
 
 
@@ -142,11 +143,13 @@ def look_for_long_files(audit, parameter):
             long_files_and_lenghts.append((audit[parameter][length_in_seconds],
             length_in_seconds))
 
-            #long_files_and_lenghts.append()
+    print(f'Long files: {long_files_and_lenghts}')
     return long_files_and_lenghts
 
 
 def import_list_of_files(filename):
+    """Generates a list of files from a text file. Expects each name to be in
+    different line"""
     files = []
     with open(filename) as f:
         for line in f:
@@ -158,9 +161,10 @@ def import_list_of_files(filename):
 def compare_list_and_wave_files_in_directory(files_to_load, wav_files):
     """Return list of required files not present in directory and list of
     files in the directory not present in the list of required"""
-    missing_files = set(files_to_load) - set(wav_files)
-    extra_files = set(wav_files) - set(files_to_load)
-    return list(missing_files), list(extra_files)
+    good_files = [item for item in files_to_load if item in wav_files]
+    missing_files = [item for  item in files_to_load if item not in wav_files]
+    extra_files = [item for item in wav_files if item not in files_to_load]
+    return good_files, missing_files, extra_files
 
 
 def print_missing_and_extra_files(missing_files, extra_files, directory):

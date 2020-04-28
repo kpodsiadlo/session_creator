@@ -10,29 +10,34 @@ filename = directory + project_name
 """Program begins"""
 ######################
 
+#load list from text file
 files_to_load = import_list_of_files('list_of_files.txt')
-print(files_to_load)
 
-#get the filenames
+# get the filenames from directory
 all_files, wav_files = get_all_and_wave_filenames_from_directory(directory)
-wavefiles = get_wavefile_objects(directory, wav_files)
 
-extra_files, files_not_present = compare_list_and_wave_files_in_directory(files_to_load, wav_files)
+#compare list and real files
+good_files, extra_files, files_not_present = \
+compare_list_and_wave_files_in_directory(files_to_load, wav_files)
+
+#self_explanatory
 print_missing_and_extra_files(extra_files, files_not_present, directory)
-"""
-write_filenames(wave_files)
 
+#create wavefile objects from the good files
+wavefiles = get_wavefile_objects(directory, good_files)
 
+#basing on data from wavefiles generate dictionary,
+#with parameters as keys, to allow auting
+audit = generate_audit(wavefiles)
 
-#audit = generate_audit(wavefiles)
-#not_matching_parameters, long_files_and_lenghts = check_if_the_files_are_the_same(audit)
-
-
-#print(f'Parameters not matching: {not_matching_parameters}\n'
-        #f'Long files: {long_files_and_lenghts}')
+#print bad values
+not_matching_parameters, long_files_and_lenghts = \
+check_if_the_files_are_the_same(audit)
 
 
 #generate final string
 project = generate_reaper_project(wavefiles, distance)
+
+#write it to file
 with open(filename, 'w') as f:
-    f.write(project)"""
+    f.write(project)

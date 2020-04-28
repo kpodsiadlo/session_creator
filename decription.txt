@@ -1,28 +1,22 @@
 1) miej szkielet (bez sciezek) v
 miej domyslna definicje sciezki v
 miej domyslna definicje pliku v
-
 Stwórz funkcję wkładającą dowolną ilość plików na listę. v
 stwórz funkcję tworzącą pełną sesję.
-
 wczytaj listę plików z zadanego folderu
 wczytaj tylko pliki .wav
 sprawdz dlugosc plikow wav
-
 1) wczytaj pliki z zadanego katalogu, sprawdź ich długość,
 stwórz sesję reapera. ustaw przerwę między plikami na 2x długość pliku.
-
-
 2) przy wczytywaniu
 sprawdź czy wszystkie pliki są tego samego typu (frequency/bitrate/channels),
 wyrzuć błąd jeżeli nie. Sprawdź czy jakieś pliki nie są bardzo długie (<30s)
-
-
 3) wczytaj listę plików z .txt, wczytaj z zadanego katalogu,
-stwórz sesję reapera w kolejności zadanej w csv
-
 wyrzuć brakujące pliki.
+stwórz sesję reapera w kolejności zadanej w pliku tekstowym
+
 
 4) przy brakujących plikach zrób puste regiony.
+!!!!!
 
 5) wczytaj listę plików z excela.
