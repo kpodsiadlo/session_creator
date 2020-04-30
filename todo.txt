@@ -14,9 +14,7 @@ wyrzuć błąd jeżeli nie. Sprawdź czy jakieś pliki nie są bardzo długie (<
 3) wczytaj listę plików z .txt, wczytaj z zadanego katalogu,
 wyrzuć brakujące pliki.
 stwórz sesję reapera w kolejności zadanej w pliku tekstowym
-
-
 4) przy brakujących plikach zrób puste regiony.
-!!!!!
-
 5) wczytaj listę plików z excela.
+
+6) niech przyjmuje argumenty
