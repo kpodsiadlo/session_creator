@@ -9,20 +9,15 @@ from reaper_output import *
 """USAGE:
 p3 session_creator.py [input_file][output_file]"""
 
-target_name = "test_project1.rpp"
-#set directory with the files
-directory = './audio/'
-distance = 2 #times the length of the file
-filename = directory + target_name
-dummy_lenght = 3 #seconds
+dummy_length = 3 #seconds
 
 ######################
 """Program begins"""
 ######################
+
+
 """Read files"""
-
-
-list_file, target_name, directory = parse_arguments()
+list_file, target_name, directory, distance = parse_arguments()
 
 if list_file[-3:] == 'txt':
     files_to_load = import_list_of_files(list_file)
@@ -49,5 +44,5 @@ inspect_files(wavefiles)
 project = generate_reaper_project(wavefiles, distance)
 
 #write it to file
-with open(filename, 'w') as f:
+with open(target_name, 'w') as f:
     f.write(project)

@@ -18,3 +18,5 @@ stwórz sesję reapera w kolejności zadanej w pliku tekstowym
 5) wczytaj listę plików z excela.
 
 6) niech przyjmuje argumenty
+
+7) popraw wczytywanie parametru zakresu z excela
