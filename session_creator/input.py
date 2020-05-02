@@ -46,29 +46,26 @@ def parse_arguments():
 
     # get the name of the output file
     try:
-        directory, target_name = os.path.split(args.output_file_path)
-    except:
-        raise IOError(f"Path {args.output_file_path} is invalid")
+        target_dir, target_name = os.path.split(args.output_file_path)
+    except OSError:
+        print(f"Path {args.output_file_path} is invalid")
 
     # Check if folder with files exists
     if os.path.isdir(args.audio_directory):
         directory = args.audio_directory
     else:
-        raise IOError(f"File {args.audio_directory} is not a valid path")
+        print(f"File {args.audio_directory} is not a valid path")
 
-    # check is ds multiplier is a number
-    try:
-        distance_multiplier = float(args.dist)
-    except:
-        raise ValueError(f"Value {args.dist} is not a number")
+    # check for float is at argparse stage
+    distance_multiplier = float(args.dist)
 
     if args.range:
         column, row_range = get_column_and_cells(args.range)
     else:
         column, row_range = None, (None, None)
 
-    return (list_file, target_name, directory, distance_multiplier, column,
-            row_range)
+    return (list_file, target_dir, target_name, directory, distance_multiplier,
+            column, row_range)
 
 
 def get_column_and_cells(spreadsheet_range):

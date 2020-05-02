@@ -19,8 +19,8 @@ dummy_length = 3  # seconds
 if __name__ == '__main__':
 
     """Read files"""
-    (list_file, target_name, directory, distance_multiplier, column,
-        row_range) = parse_arguments()
+    (list_file, target_dir, target_name, directory, distance_multiplier, 
+     column, row_range) = parse_arguments()
 
     if list_file[-3:] == 'txt':
         files_to_load = import_list_of_files(list_file)

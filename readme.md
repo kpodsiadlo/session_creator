@@ -2,7 +2,7 @@
 
 A tool for automatic creation of DAW sessions, based on the list of files supplied in .txt or Excel format. Designed with audio post-production studios in mind.
 
-## Dependencies:
+## Prerequisites:
 Developed in Python 3.6.8.
 
 Requires openpyxl 3.0.3 or later.
@@ -31,6 +31,11 @@ Optional arguments:
 
   --range [RANGE], -r [RANGE]: Location of filenames in the spreadsheet, e.g. "A2:A20". Required if an Excel spreadsheet is specified as input file.
 
+
+## Future work
+Packaging.
+
+GUI.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
