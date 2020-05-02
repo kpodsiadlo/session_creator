@@ -36,7 +36,7 @@ if __name__ == '__main__':
     # compare text list and real files and print results
     good_files, extra_files, files_not_present = \
         compare_list_and_wave_files_in_directory(
-            files_to_load, wav_files, directory)
+                files_to_load, wav_files, directory)
 
     # create wavefile objects from the good files and create dummies
     wavefiles = create_wavefile_objects(files_to_load, good_files, directory)
