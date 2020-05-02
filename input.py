@@ -17,11 +17,14 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser(description = help_description)
     parser.add_argument(
-    'input_file', type=str, help='Input file: txt or xls/xls.')
+    'input_file_path', type=str,
+    help='Path to a file with the list of required files:txt or xls/xls.')
     parser.add_argument(
-    'output_file', type=str, help='Input file: RPP (Reaper).')
+    'output_file_path', type=str,
+    help='Path to an output file: suported filetype: .RPP (Reaper).')
     parser.add_argument(
-    'audio_directory', type=str, help='Directory with audio files.')
+    'audio_directory', type=str,
+    help='Path to a directory with the audio files.')
     #Nargs gets additional arguments. "?" means get and return one argument
     parser.add_argument(
     '--dist', '-d', nargs='?', type=float,
@@ -29,21 +32,22 @@ def parse_arguments():
     default=2)
     parser.add_argument(
     '--range', '-r', nargs = '?', type=str,
-    help='Spreadsheet range, e.g. "[A2:A20]"')
+    help='Spreadsheet range, e.g. "A2:A20"')
 
     args = parser.parse_args()
+    print(args)
 
     #check if input file exist
-    if os.path.isfile(args.input_file):
-        list_file = args.input_file
+    if os.path.isfile(args.input_file_path):
+        list_file = args.input_file_path
     else:
-        raise IOError(f"File {args.input_file} not found")
+        raise IOError(f"File {args.input_file_path} not found")
 
     #get the name of the output file
     try:
-        directory, target_name = os.path.split(args.output_file)
+        directory, target_name = os.path.split(args.output_file_path)
     except:
-        raise IOError(f"Path {args.output_file} is invalid")
+        raise IOError(f"Path {args.output_file_path} is invalid")
 
     #Check if folder with files exists
     if os.path.isdir(args.audio_directory):
@@ -53,9 +57,9 @@ def parse_arguments():
 
     #check is length multiplier is a number
     try:
-        distance_multiplicator = float(args.distance)
+        distance_multiplicator = float(args.dist)
     except:
-        raise InputError(f"Value {args.distance} is not a number")
+        raise ValueError(f"Value {args.dist} is not a number")
 
     column, row_range = get_column_and_cells(args.range)
 
@@ -66,17 +70,17 @@ def get_column_and_cells(spreadsheet_range):
     """Check if excel range is in correct format and get the column and row
     range"""
     spreadsheet_range = spreadsheet_range.lower()
-    if re.match('\[[a-z][0-9]\]:\[[a-z][0-9]\]', spreadsheet_range):
-        if spreadsheet_range[1] != spreadsheet_range[-3]:
-            raise InputError("You can load data from one column only!")
-        elif int(spreadsheet_range[2]) > int(spreadsheet_range[-2]):
-            raise InputError("End row number must be greater that start row number")
+    if re.match('[a-z][0-9]:[a-z][0-9]', spreadsheet_range):
+        if spreadsheet_range[0] != spreadsheet_range[-2]:
+            raise ValueError("You can load data from one column only!")
+        elif int(spreadsheet_range[1]) > int(spreadsheet_range[-1]):
+            raise ValueError("End row number must be greater that start row number")
         else:
-            column = spreadsheet_range[1]
-            row_range = (int(spreadsheet_range[2]), int(spreadsheet_range[-2]))
+            column = spreadsheet_range[0]
+            row_range = (int(spreadsheet_range[1]), int(spreadsheet_range[-1]))
             return column, row_range
     else:
-        raise InputError("Spreadsheet range must be in [A1]:[A10] format")
+        raise ValueError("Spreadsheet range must be in 'A1:A10' format")
 
 
 def import_list_of_files(filename):
