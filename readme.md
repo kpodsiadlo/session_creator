@@ -2,9 +2,9 @@
 
 A tool for automatic creation of DAW sessions, based on the list of files supplied in .txt or Excel format. Designed with audio post-production studios in mind.
 
-## Installation
-
-Does not require installation. Uses only Python 3.6 internal library.
+## Dependencies:
+Developed in Python 3.6.8.
+Requires openpyxl 3.0.3 or later. 
 
 ## Usage
 
