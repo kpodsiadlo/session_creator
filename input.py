@@ -55,16 +55,17 @@ def parse_arguments():
     else:
         raise IOError(f"File {args.audio_directory} is not a valid path")
 
-    #check is length multiplier is a number
+    #check is ds multiplier is a number
     try:
-        distance_multiplicator = float(args.dist)
+        distance_multiplier = float(args.dist)
     except:
         raise ValueError(f"Value {args.dist} is not a number")
 
     column, row_range = get_column_and_cells(args.range)
 
-    return (list_file, target_name, directory, distance_multiplicator, column,
+    return (list_file, target_name, directory, distance_multiplier, column,
             row_range)
+
 
 def get_column_and_cells(spreadsheet_range):
     """Check if excel range is in correct format and get the column and row

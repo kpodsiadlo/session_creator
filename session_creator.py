@@ -1,15 +1,12 @@
 import os
 import sys
-sys.tracebacklimit = 5
+sys.tracebacklimit = 0
 
-from basic_functions import *
 from input import *
 from process import *
 from reaper_output import *
 
-
-"""USAGE:
-p3 session_creator.py [input_file][output_file]"""
+#lenght of a dummy region if file does not exist
 
 dummy_length = 3 #seconds
 
@@ -19,7 +16,7 @@ dummy_length = 3 #seconds
 
 
 """Read files"""
-(list_file, target_name, directory, distance_multiplicator, column,
+(list_file, target_name, directory, distance_multiplier, column,
         row_range) = parse_arguments()
 
 if list_file[-3:] == 'txt':
@@ -45,7 +42,7 @@ inspect_files(wavefiles)
 
 """Write"""
 #generate final string
-project = generate_reaper_project(wavefiles, distance_multiplicator)
+project = generate_reaper_project(wavefiles, distance_multiplier)
 
 #write it to file
 with open(target_name, 'w') as f:

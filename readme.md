@@ -4,7 +4,8 @@ A tool for automatic creation of DAW sessions, based on the list of files suppli
 
 ## Dependencies:
 Developed in Python 3.6.8.
-Requires openpyxl 3.0.3 or later. 
+
+Requires openpyxl 3.0.3 or later.
 
 ## Usage
 
