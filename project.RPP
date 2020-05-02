@@ -83,7 +83,7 @@
   >
   <PROJBAY
   >
-  <TRACK {733641BD-3E76-4D79-8107-883569282129}
+  <TRACK {B54F4012-D412-4E93-BBFC-8EC9B9251906}
     NAME ""
     PEAKCOL 16576
     BEAT 0
@@ -103,7 +103,7 @@
     INQ 0 0 0 0.5 100 0 0 100
     NCHAN 2
     FX 1
-    TRACKID {733641BD-3E76-4D79-8107-883569282129}
+    TRACKID {B54F4012-D412-4E93-BBFC-8EC9B9251906}
     PERF 0
     MIDIOUT -1
     MAINSEND 1 0
@@ -116,17 +116,61 @@
           FADEOUT 1 0.01 0 1 0 0
           MUTE 0
           SEL 1
-          IGUID {805BED70-550D-4394-B475-475FE9550A61}
+          IGUID {F9BE6D06-29BF-49FC-B7A3-A913A1747E4E}
           IID 1
           NAME weefou.wav
           VOLPAN 1 0 1 -1
           SOFFS 0
           PLAYRATE 1 1 0 -1 0 0.0025
           CHANMODE 0
-          GUID {2AC8B9FE-3222-4399-8E7E-5CCD25BC20C8}]
+          GUID {9DBD977E-4E09-46F6-8B31-C1E0F2789DD7}]
           RECPASS 1
           <SOURCE WAVE
            FILE "weefou.wav"
+          >
+    >
+    <ITEM
+          POSITION 15.962630385487529          SNAPOFFS 0
+          LENGTH 4.845215419501134
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {9B20EB92-B258-41ED-BBBE-220879B03E7E}
+          IID 1
+          NAME selfiu.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {AD742815-BF04-44BC-83B1-B1CB74BFD088}]
+          RECPASS 1
+          <SOURCE WAVE
+           FILE "selfiu.wav"
+          >
+    >
+    <ITEM
+          POSITION 35.343492063492064          SNAPOFFS 0
+          LENGTH 2
+          LOOP 1
+          ALLTAKES 0
+          FADEIN 1 0.01 0 1 0 0
+          FADEOUT 1 0.01 0 1 0 0
+          MUTE 0
+          SEL 1
+          IGUID {4BD0785A-9C26-450C-BF82-FAEEABB6C5AA}
+          IID 1
+          NAME skrzynka.wav
+          VOLPAN 1 0 1 -1
+          SOFFS 0
+          PLAYRATE 1 1 0 -1 0 0.0025
+          CHANMODE 0
+          GUID {1A5E99E8-B303-44D8-A656-C7166F011745}]
+          RECPASS 1
+          <SOURCE WAVE
+           FILE "skrzynka.wav"
           >
     >
 >

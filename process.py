@@ -12,14 +12,13 @@ def create_wavefile_objects(files_to_load, good_files, directory):
             wave_objects_list.append(Wavefile(filename, directory))
         else:
             wave_objects_list.append(create_dummy(filename))
-    #for object in wave_objects_list:
-    #    print(object.name)
+
     return wave_objects_list
 
 
 def create_dummy(filename):
-        dummy = Wavefile(filename)
-        return dummy
+    dummy = Wavefile(filename)
+    return dummy
 
 
 def inspect_files(wave_objects_list):
@@ -27,12 +26,12 @@ def inspect_files(wave_objects_list):
     data = {}
     for wavefile in wave_objects_list:
         (filename, channels, sampwidth,
-                    framerate, length_in_seconds) = wavefile.get_info()
+         framerate, length_in_seconds) = wavefile.get_info()
 
         data[filename] = {'channels': channels,
-                        'sampwidth': sampwidth,
-                        'framerate':framerate,
-                        'length_in_seconds':length_in_seconds}
+                          'sampwidth': sampwidth,
+                          'framerate': framerate,
+                          'length_in_seconds': length_in_seconds}
 
     """Create a defaultdict, taking as default result of a function
     returinng a defaultdict that takes as default result of a function
@@ -59,7 +58,7 @@ def check_if_the_files_are_the_same(audit):
             long_files_and_lenghts = look_for_long_files(audit, parameter)
 
         else:
-            #sprawdz czy wszystkie pliki sa takie same.
+            # check if all the files have the same length.
             if len(set(audit[parameter].keys())) == 1:
                 print(f'All files have the same {parameter}')
             else:
@@ -74,7 +73,7 @@ def look_for_long_files(audit, parameter):
     for length_in_seconds in audit[parameter]:
         if length_in_seconds > 4:
             long_files_and_lenghts.append((audit[parameter][length_in_seconds],
-            length_in_seconds))
+                                           length_in_seconds))
 
     if long_files_and_lenghts:
         print(f'Long files: {long_files_and_lenghts}')
@@ -82,11 +81,12 @@ def look_for_long_files(audit, parameter):
     return long_files_and_lenghts
 
 
-def compare_list_and_wave_files_in_directory(files_to_load, wav_files, directory):
+def compare_list_and_wave_files_in_directory(
+                                    files_to_load, wav_files, directory):
     """Return list of required files not present in directory and list of
     files in the directory not present in the list of required"""
     good_files = [item for item in files_to_load if item in wav_files]
-    missing_files = [item for  item in files_to_load if item not in wav_files]
+    missing_files = [item for item in files_to_load if item not in wav_files]
     extra_files = [item for item in wav_files if item not in files_to_load]
     print_missing_and_extra_files(missing_files, extra_files, directory)
 
@@ -95,7 +95,8 @@ def compare_list_and_wave_files_in_directory(files_to_load, wav_files, directory
 
 def print_missing_and_extra_files(missing_files, extra_files, directory):
     if len(missing_files) != 0:
-        print(f"The following files are missing in ''{directory}': {missing_files}")
+        print(f"The following files     "
+              f"are missing in '{directory}': {missing_files}")
     if len(extra_files) != 0:
         print(f"The following files found in {directory}' folder "
-        f"are not on the list: {extra_files}")
+              f"are not on the list: {extra_files}")

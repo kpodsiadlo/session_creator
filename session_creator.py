@@ -26,7 +26,7 @@ if __name__ == '__main__':
         files_to_load = import_list_of_files(list_file)
     elif list_file[-3:] == 'xls' or 'xlsx':
         files_to_load = get_filenames_from_excel_column(
-                        list_file, column, row_range[0], row_range[1])
+            list_file, column, row_range[0], row_range[1])
 
     # get the filenames from directory
     all_files, wav_files = get_all_and_wave_filenames_from_directory(directory)
@@ -36,14 +36,13 @@ if __name__ == '__main__':
     # compare text list and real files and print results
     good_files, extra_files, files_not_present = \
         compare_list_and_wave_files_in_directory(
-                files_to_load, wav_files, directory)
+            files_to_load, wav_files, directory)
 
     # create wavefile objects from the good files and create dummies
     wavefiles = create_wavefile_objects(files_to_load, good_files, directory)
 
     # inpect wavefiles for inconsistencies and print results
     inspect_files(wavefiles)
-
 
     """Write"""
     # generate final string

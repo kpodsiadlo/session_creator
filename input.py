@@ -17,7 +17,7 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser(description=help_description)
     parser.add_argument(
-        'input_file_path', type=str, 
+        'input_file_path', type=str,
         help='Path to a file with the list of required files:txt or xls/xls.')
     parser.add_argument(
         'output_file_path', type=str,
