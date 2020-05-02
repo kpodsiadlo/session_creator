@@ -5,10 +5,10 @@ from input import *
 from process import *
 from reaper_output import *
 
-sys.tracebacklimit = 0
+sys.tracebacklimit = 10
 
 
-# lenght of a dummy region if file does not exist
+# length of a dummy region if file does not exist
 
 dummy_length = 3  # seconds
 
@@ -49,5 +49,5 @@ if __name__ == '__main__':
     project = generate_reaper_project(wavefiles, distance_multiplier)
 
     # write it to file
-    with open(target_name, 'w') as f:
+    with open(directory + "/" + target_name, 'w') as f:
         f.write(project)

@@ -62,7 +62,10 @@ def parse_arguments():
     except:
         raise ValueError(f"Value {args.dist} is not a number")
 
-    column, row_range = get_column_and_cells(args.range)
+    if args.range:
+        column, row_range = get_column_and_cells(args.range)
+    else:
+        column, row_range = None, (None, None)
 
     return (list_file, target_name, directory, distance_multiplier, column,
             row_range)
