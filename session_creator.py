@@ -1,4 +1,6 @@
 import os
+import sys
+sys.tracebacklimit = 5
 
 from basic_functions import *
 from input import *
@@ -17,12 +19,14 @@ dummy_length = 3 #seconds
 
 
 """Read files"""
-list_file, target_name, directory, distance = parse_arguments()
+(list_file, target_name, directory, distance_multiplicator, column,
+        row_range) = parse_arguments()
 
 if list_file[-3:] == 'txt':
     files_to_load = import_list_of_files(list_file)
 elif list_file[-3:] == 'xls' or 'xlsx':
-    files_to_load = get_filenames_from_excel_column(list_file, 'C', 2, 10)
+    files_to_load = get_filenames_from_excel_column(
+                    list_file, column, row_range[0],row_range[1])
 
 # get the filenames from directory
 all_files, wav_files = get_all_and_wave_filenames_from_directory(directory)
@@ -41,7 +45,7 @@ inspect_files(wavefiles)
 
 """Write"""
 #generate final string
-project = generate_reaper_project(wavefiles, distance)
+project = generate_reaper_project(wavefiles, distance_multiplicator)
 
 #write it to file
 with open(target_name, 'w') as f:

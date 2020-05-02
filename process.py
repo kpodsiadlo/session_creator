@@ -12,8 +12,8 @@ def create_wavefile_objects(files_to_load, good_files, directory):
             wave_objects_list.append(Wavefile(filename, directory))
         else:
             wave_objects_list.append(create_dummy(filename))
-    for object in wave_objects_list:
-        print(object.name)
+    #for object in wave_objects_list:
+    #    print(object.name)
     return wave_objects_list
 
 
@@ -76,7 +76,9 @@ def look_for_long_files(audit, parameter):
             long_files_and_lenghts.append((audit[parameter][length_in_seconds],
             length_in_seconds))
 
-    print(f'Long files: {long_files_and_lenghts}')
+    if long_files_and_lenghts:
+        print(f'Long files: {long_files_and_lenghts}')
+
     return long_files_and_lenghts
 
 
