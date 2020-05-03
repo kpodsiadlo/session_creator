@@ -6,6 +6,7 @@ A tool for automatic creation of DAW sessions, based on the list of files suppli
 Developed in Python 3.6.8.
 
 Requires openpyxl 3.0.3 or later.
+GUI with PySimpleGui 4.18.2
 
 ## Usage
 
