@@ -34,7 +34,7 @@ def inspect_files(wave_objects_list):
                           'length_in_seconds': length_in_seconds}
 
     """Create a defaultdict, taking as default result of a function
-    returinng a defaultdict that takes as default result of a function
+    returning a defaultdict that takes as default result of a function
     returning an empty list
     """
     audit = defaultdict(lambda: defaultdict(list))

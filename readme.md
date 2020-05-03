@@ -33,9 +33,9 @@ Optional arguments:
 
 
 ## Future work
+Checking for incorrect value types in GUI text fields.
 Packaging.
-
-GUI.
+Testing.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

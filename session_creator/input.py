@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import re
 
@@ -36,25 +37,24 @@ def parse_arguments():
         help='Spreadsheet range, e.g. "A2:A20"')
 
     args = parser.parse_args()
-    print(args)
 
     # check if input file exist
     if os.path.isfile(args.input_file_path):
         list_file = args.input_file_path
     else:
-        raise IOError(f"File {args.input_file_path} not found")
+        sys.exit(f"File {args.input_file_path} not found")
 
     # get the name of the output file
     try:
         target_dir, target_name = os.path.split(args.output_file_path)
     except OSError:
-        print(f"Path {args.output_file_path} is invalid")
+        sys.exit(f"Path {args.output_file_path} is invalid")
 
     # Check if folder with files exists
     if os.path.isdir(args.audio_directory):
         directory = args.audio_directory
     else:
-        print(f"File {args.audio_directory} is not a valid path")
+        sys.exit(f"File {args.audio_directory} is not a valid path")
 
     # check for float is at argparse stage
     distance_multiplier = float(args.dist)

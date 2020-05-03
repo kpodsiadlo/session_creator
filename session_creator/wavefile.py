@@ -1,10 +1,11 @@
 import wave
+import os
 
 
 class Wavefile():
     def __init__(self, filename=None, directory=None):
         if directory:
-            self.path = directory + filename
+            self.path = os.path.join(directory, filename)
             # wave.open creates representation of wave file
             with wave.open(self.path) as f:
                 (self.nchannels, self.sampwidth, self.framerate, self.nframes,
@@ -19,6 +20,9 @@ class Wavefile():
                                         None, None, None, None, None, None)
             self.name = filename
             self.length_in_seconds = 2
+
+        print(self.name)
+
 
     def get_info(self):
         return (self.name, self.nchannels, self.sampwidth, self.framerate,

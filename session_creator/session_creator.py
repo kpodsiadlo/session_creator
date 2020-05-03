@@ -16,11 +16,9 @@ dummy_length = 3  # seconds
 """Program begins"""
 ######################
 
-if __name__ == '__main__':
 
-    """Read files"""
-    (list_file, target_dir, target_name, directory, distance_multiplier, 
-     column, row_range) = parse_arguments()
+def main(list_file, target_dir, target_name, directory, distance_multiplier,    
+         column, row_range):
 
     if list_file[-3:] == 'txt':
         files_to_load = import_list_of_files(list_file)
@@ -51,3 +49,13 @@ if __name__ == '__main__':
     # write it to file
     with open(directory + "/" + target_name, 'w') as f:
         f.write(project)
+
+
+if __name__ == '__main__':
+
+    """Read files"""
+    (list_file, target_dir, target_name, directory, distance_multiplier,    
+     column, row_range) = parse_arguments()
+
+    main(list_file, target_dir, target_name, directory, distance_multiplier,    
+         column, row_range)

@@ -25,6 +25,6 @@ def get_filenames_from_excel_column(
     ws = wb['Sheet1']
     # get the values
     file_list = [ws.cell(row=i, column=column_number).value
-                 for i in range(row_start_num, row_stop_num)]
+                 for i in range(row_start_num, row_stop_num+1)]
 
     return file_list
