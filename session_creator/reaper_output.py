@@ -5,7 +5,7 @@ def create_empty_track():
     """Creates a track string"""
     id = str(uuid4()).upper()
 
-    with open('../resources/reaper/track.txt', 'r') as f:
+    with open('resources/reaper/track.txt', 'r') as f:
         track = f.readlines()
     # multiple {{{ to escape "{}" formatting
     track[0] = f"  <TRACK {{{id}}}\n"
@@ -20,7 +20,7 @@ def create_item(wavefile, position):
     iguid = str(uuid4()).upper()
     guid = str(uuid4()).upper()
 
-    with open('../resources/reaper/item.txt', 'r') as f:
+    with open('resources/reaper/item.txt', 'r') as f:
         item = f.readlines()
         item[1] = f"          POSITION {position}"
         item[3] = f"          LENGTH {wavefile.length_in_seconds}\n"
@@ -51,7 +51,7 @@ def create_track_with_items(items):  # items = string:
 
 
 def create_project(track):
-    with open('../resources/reaper/skeleton.txt') as f:
+    with open('resources/reaper/skeleton.txt') as f:
         skeleton = f.read()
     project = skeleton[:-2] + track + skeleton[-2:]
     return project

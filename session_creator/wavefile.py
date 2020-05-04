@@ -1,5 +1,6 @@
 import wave
 import os
+import settings as st
 
 
 class Wavefile():
@@ -19,10 +20,9 @@ class Wavefile():
              self.comptype, self.compname) = (
                                         None, None, None, None, None, None)
             self.name = filename
-            self.length_in_seconds = 2
+            self.length_in_seconds = st.dummy_length
 
         print(self.name)
-
 
     def get_info(self):
         return (self.name, self.nchannels, self.sampwidth, self.framerate,

@@ -1,43 +1,35 @@
 import os
 import sys
 
-from input import *
+from input_functions import *
 from process import *
 from reaper_output import *
-
-sys.tracebacklimit = 10
-
-
-# length of a dummy region if file does not exist
-
-dummy_length = 3  # seconds
-
-######################
-"""Program begins"""
-######################
+import settings as st
 
 
-def main(list_file, target_dir, target_name, directory, distance_multiplier,    
-         column, row_range):
+def main(list_file_path, output_file_path, audio_directory,
+         distance_multiplier, column, row_range):
 
-    if list_file[-3:] == 'txt':
-        files_to_load = import_list_of_files(list_file)
-    elif list_file[-3:] == 'xls' or 'xlsx':
+    if list_file_path[-3:] == 'txt':
+        files_to_load = import_list_of_files(list_file_path)
+    elif list_file_path[-3:] == 'xls' or 'lsx':
         files_to_load = get_filenames_from_excel_column(
-            list_file, column, row_range[0], row_range[1])
+            list_file_path, column, row_range[0], row_range[1])
 
     # get the filenames from directory
-    all_files, wav_files = get_all_and_wave_filenames_from_directory(directory)
+    all_files, wav_files = get_all_and_wave_filenames_from_directory(
+                                                            audio_directory)
 
     """Process and analyze"""
 
     # compare text list and real files and print results
     good_files, extra_files, files_not_present = \
         compare_list_and_wave_files_in_directory(
-            files_to_load, wav_files, directory)
+            files_to_load, wav_files, audio_directory)
 
     # create wavefile objects from the good files and create dummies
-    wavefiles = create_wavefile_objects(files_to_load, good_files, directory)
+    wavefiles = create_wavefile_objects(files_to_load, good_files,
+                                        audio_directory)
 
     # inpect wavefiles for inconsistencies and print results
     inspect_files(wavefiles)
@@ -47,15 +39,23 @@ def main(list_file, target_dir, target_name, directory, distance_multiplier,
     project = generate_reaper_project(wavefiles, distance_multiplier)
 
     # write it to file
-    with open(directory + "/" + target_name, 'w') as f:
+    with open(output_file_path, 'w') as f:
         f.write(project)
 
 
+# For CLI use
 if __name__ == '__main__':
 
     """Read files"""
-    (list_file, target_dir, target_name, directory, distance_multiplier,    
-     column, row_range) = parse_arguments()
+    (list_file_path, output_file_path, directory, distance_multiplier,
+     column, row_range) = parse_cli_arguments()
 
-    main(list_file, target_dir, target_name, directory, distance_multiplier,    
-         column, row_range)
+    errors, row_range, distance_multiplier = validate_input(
+        list_file_path, output_file_path, directory, distance_multiplier,
+        column, row_range)
+
+    if errors:
+        print(errors)
+    else:
+        main(list_file_path, output_file_path, directory, distance_multiplier,
+             column, row_range)

@@ -7,18 +7,8 @@ def get_filenames_from_excel_column(
     """Return a list of entries in a given column"""
 
     file_list = []
-    if len(column_letter) != 1:
-        raise ValueError("The column ID must be \
-                        a single letter between A and Z")
-    else:
-        try:
-            column_letter_lowercase = column_letter.lower()
-        except:
-            raise ValueError("The column ID must be \
-                            a single letter between A and Z")
-        finally:
-            column_number = int(ord(column_letter_lowercase) - 96)
-
+    column_letter_lowercase = column_letter.lower()
+    column_number = int(ord(column_letter_lowercase) - 96)
     # get the file
     wb = load_workbook(filename)
     # get the sheet
