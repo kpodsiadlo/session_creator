@@ -1,13 +1,14 @@
 import PySimpleGUI as sg
 from session_creator import main
 from input_functions import validate_input
+import settings as st
 
 
 # Create GUI:
 sg.theme('DarkAmber')   # Add a touch of color
 layout = [[sg.Text('Select input file:')],
           [sg.Input(key='_input_file_',
-           default_text='../tests/resources/input_files/file_list.xlsx'),
+           default_text=st.gui_default_input_path),
            sg.FileBrowse()],
           [sg.Text('Select spreadsheet range (for Excel files):')],
           [sg.T('Column:'),
@@ -20,11 +21,11 @@ layout = [[sg.Text('Select input file:')],
            sg.I(default_text='2', size=(3, None), key='_distance_')],
           [sg.Text('Select audio folder:')],
           [sg.Input(key='_folder_',
-           default_text='../tests/resources/test_audio'),
+           default_text=st.gui_default_audio_folder),
            sg.FolderBrowse()],
           [sg.Text('Select output file::')],
           [sg.Input(key='_output_file_',
-           default_text='../tests/test_gui.RPP'),
+           default_text=st.gui_default_output_path),
           sg.FileSaveAs(
               file_types=(('ALL Files', '*.*'), ('Reaper project', '*.RPP')))],
           [sg.T(' '*40), sg.Button(button_text='Generate')]

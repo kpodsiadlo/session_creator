@@ -39,23 +39,26 @@ def main(list_file_path, output_file_path, audio_directory,
     project = generate_reaper_project(wavefiles, distance_multiplier)
 
     # write it to file
-    with open(output_file_path, 'w') as f:
+    with open(outtest_wrong_formatput_file_path, 'w') as f:
         f.write(project)
 
 
 # For CLI use
 if __name__ == '__main__':
 
+    arguments = sys.argv[1:]
+
     """Read files"""
     (list_file_path, output_file_path, directory, distance_multiplier,
-     column, row_range) = parse_cli_arguments()
+     column, row_range) = parse_cli_arguments(arguments)
 
     errors, row_range, distance_multiplier = validate_input(
         list_file_path, output_file_path, directory, distance_multiplier,
         column, row_range)
 
     if errors:
-        print(errors)
+        print(f'Input errors: {errors}.')
+        print('"python3 session_creator.py -h" for help.')
     else:
         main(list_file_path, output_file_path, directory, distance_multiplier,
              column, row_range)

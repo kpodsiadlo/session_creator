@@ -2,12 +2,14 @@ import os
 import sys
 import argparse
 import re
+from textwrap import dedent
 
 from excel_parsing import get_filenames_from_excel_column
 import settings as st
 
 
-def parse_cli_arguments():
+def parse_cli_arguments(arguments):  # CLI ONLY
+
     """Parse arguments given to the script.
     Check if the arguments are valid filenames and directories.
     Return list of files to load, name of target project and directory with
@@ -37,12 +39,13 @@ def parse_cli_arguments():
         '--range', '-r', nargs='?', type=str, default=None,
         help='Spreadsheet column (single) and rows, e.g. "A2:20"')
 
-    args = parser.parse_args()
+    args = parser.parse_args(arguments)
 
     list_file_path = args.input_file_path
     output_file_path = args.output_file_path
     directory = args.audio_directory
     distance_multiplier = args.dist
+
     if args.range:
         column, row_range = get_column_and_cells(args.range)
     else:
@@ -50,6 +53,28 @@ def parse_cli_arguments():
 
     return (list_file_path, output_file_path, directory, distance_multiplier,
             column, row_range)
+
+
+def get_column_and_cells(spreadsheet_range):  # CLI ONLY
+    """Check if excel range is in correct format and get the column and row
+    range"""
+    spreadsheet_range = spreadsheet_range.lower()
+
+    if re.match('[a-z][0-9]+:[0-9]+', spreadsheet_range):
+        column = spreadsheet_range[0]
+        rows = re.findall('[0-9]+', spreadsheet_range)
+        row_range = (rows[0], rows[1])
+
+        # keeping it str for compatibility with the GUI
+        if int(rows[0]) > int(rows[1]):
+            raise ValueError("End row number must be "
+                             + "greater that start row number.")
+        else:
+            return column, row_range
+
+    else:
+        raise ValueError("Spreadsheet range must be in [column]"
+                         + "[start_row]:[end_row] (eg. 'A1:10') format.""")
 
 
 def validate_input(list_file, output_file_path, directory,
@@ -120,24 +145,6 @@ def validate_excel_range(column, row_range, errors):
             errors.append("Stop_row_larger_than_start_row")
 
     return row_start, row_stop, errors
-
-
-def get_column_and_cells(spreadsheet_range):
-    """Check if excel range is in correct format and get the column and row
-    range"""
-    spreadsheet_range = spreadsheet_range.lower()
-
-    if re.match('[a-z][0-9]:[0-9]', spreadsheet_range):
-        if int(spreadsheet_range[1]) > int(spreadsheet_range[-1]):
-            raise ValueError("End row number must be \
-                            greater that start row number")
-        else:
-            column = spreadsheet_range[0]
-            row_range = (int(spreadsheet_range[1]), int(spreadsheet_range[-1]))
-            return column, row_range
-    else:
-        raise ValueError("Spreadsheet range must be in \
-                          [column][start_row][end_row] (eg. 'A1:10' format")
 
 
 def import_list_of_files(filename):
