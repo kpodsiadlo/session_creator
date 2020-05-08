@@ -51,6 +51,8 @@ def parse_cli_arguments(arguments):  # CLI ONLY
     else:
         column, row_range = None, (None, None)
 
+# print(list_file_path, output_file_path, directory, distance_multiplier,
+#        column, row_range)
     return (list_file_path, output_file_path, directory, distance_multiplier,
             column, row_range)
 
@@ -117,6 +119,7 @@ def validate_input(list_file, output_file_path, directory,
 def validate_excel_range(column, row_range, errors):
 
     try:
+
         if not column.isalpha():
             errors.append('Column_ID_invalid')  # check is column is valid
     except AttributeError:

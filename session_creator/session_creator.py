@@ -39,7 +39,7 @@ def main(list_file_path, output_file_path, audio_directory,
     project = generate_reaper_project(wavefiles, distance_multiplier)
 
     # write it to file
-    with open(outtest_wrong_formatput_file_path, 'w') as f:
+    with open(output_file_path, 'w') as f:
         f.write(project)
 
 
