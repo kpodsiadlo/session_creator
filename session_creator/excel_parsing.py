@@ -6,7 +6,6 @@ def get_filenames_from_excel_column(
         filename, column_letter, row_start_num, row_stop_num):
     """Return a list of entries in a given column"""
 
-    file_list = []
     column_letter_lowercase = column_letter.lower()
     column_number = int(ord(column_letter_lowercase) - 96)
     # get the file

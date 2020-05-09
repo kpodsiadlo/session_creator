@@ -11,7 +11,6 @@ import settings as st
 def parse_cli_arguments(arguments):  # CLI ONLY
 
     """Parse arguments given to the script.
-    Check if the arguments are valid filenames and directories.
     Return list of files to load, name of target project and directory with
     the audio files"""
 
@@ -46,6 +45,7 @@ def parse_cli_arguments(arguments):  # CLI ONLY
     directory = args.audio_directory
     distance_multiplier = args.dist
 
+
     if args.range:
         column, row_range = get_column_and_cells(args.range)
     else:
@@ -60,6 +60,7 @@ def parse_cli_arguments(arguments):  # CLI ONLY
 def get_column_and_cells(spreadsheet_range):  # CLI ONLY
     """Check if excel range is in correct format and get the column and row
     range"""
+
     spreadsheet_range = spreadsheet_range.lower()
 
     if re.match('[a-z][0-9]+:[0-9]+', spreadsheet_range):
@@ -81,10 +82,9 @@ def get_column_and_cells(spreadsheet_range):  # CLI ONLY
 
 def validate_input(list_file, output_file_path, directory,
                    distance_multiplier, column, row_range):
+                   
     errors = []
-
     if os.path.isfile(list_file):  # if file exist:
-
         # if invalid type:
         extension = os.path.splitext(list_file)[1]
         if not any(extension in st.input_formats[ext_type]
@@ -92,12 +92,16 @@ def validate_input(list_file, output_file_path, directory,
             errors.append("List_file_unknown_format.")
 
         # if is a spreadsheet, validate cell range input
-        if extension in st.input_formats['spreadsheet']:
+        elif extension in st.input_formats['spreadsheet']:
             row_start, row_stop, errors = validate_excel_range(
                                                 column, row_range, errors)
 
+        elif extension in st.input_formats['text']:
+            (row_start, row_stop) = (None, None)
+
     else:  # if file does not exist:
         errors.append("List_file_missing")
+        (row_start, row_stop) = (None, None)
 
     if not os.path.isdir(directory):  # if audio folder does not exist:
         errors.append("Audio_directory_invalid")
@@ -110,10 +114,7 @@ def validate_input(list_file, output_file_path, directory,
     except ValueError:
         errors.append("Distance_value_invalid")
 
-    if errors:
-        return errors, None, None
-    else:
-        return errors, (row_start, row_stop), distance_multiplier
+    return errors, (row_start, row_stop), distance_multiplier
 
 
 def validate_excel_range(column, row_range, errors):
@@ -161,7 +162,7 @@ def import_list_of_files(filename):
     return files
 
 
-def get_all_and_wave_filenames_from_directory(directory='./audio'):
+def get_all_and_wave_filenames_from_directory(directory):
     filenames = os.listdir(directory)
     wav_files = [file for file in filenames if file[-4:] == '.wav']
 

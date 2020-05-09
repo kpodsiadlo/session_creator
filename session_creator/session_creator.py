@@ -5,6 +5,7 @@ from input_functions import *
 from process import *
 from reaper_output import *
 import settings as st
+from user_input import UserInput
 
 
 def main(list_file_path, output_file_path, audio_directory,
@@ -55,9 +56,10 @@ if __name__ == '__main__':
     errors, row_range, distance_multiplier = validate_input(
         list_file_path, output_file_path, directory, distance_multiplier,
         column, row_range)
+        
 
     if errors:
-        print(f'Input errors: {errors}.')
+        print(errors)
         print('"python3 session_creator.py -h" for help.')
     else:
         main(list_file_path, output_file_path, directory, distance_multiplier,

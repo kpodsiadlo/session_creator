@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from session_creator import main
 from input_functions import validate_input
 import settings as st
-
+from user_input import UserInput
 
 # Create GUI:
 sg.theme('DarkAmber')   # Add a touch of color
@@ -50,10 +50,18 @@ while True:
         column = values['_column_']
         row_range = (values['_firstrow_'], values['_lastrow_'])
 
+
         # Validate input
         errors, row_range, distance_multiplier = validate_input(
             list_file_path, output_file_path, directory, distance_multiplier,
             column, row_range)
+
+
+        user_input = UserInput(list_file_path, output_file_path, directory,
+                           distance_multiplier, column, row_range)
+
+        if user_input.errors:
+            print(f"User input: {user_input.errors}")
 
         if errors:
             print(errors)

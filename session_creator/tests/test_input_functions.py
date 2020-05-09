@@ -41,9 +41,12 @@ class test_parse_cli_arguments(unittest.TestCase):
          "3.987"]
 
         results = (
-            "tests/resources/input_files/file_list.xlsx",
+            "tests/resources/input_files/file_list.txt",
             "tests/resources/cliout.rpp", "tests/resources/test_audio", 3.987,
             None, (None, None))
+
+        self.assertEqual(parse_cli_arguments(arguments), results)
+
 
 #    def test_empty_input(self):
 #        with self.assertRaises(SystemExit) as se:
