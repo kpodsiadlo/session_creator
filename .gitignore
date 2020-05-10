@@ -5,3 +5,4 @@ development_functions.py
 todo.txt
 venv
 session_creator.code-workspace
+tests/test_gui.RPP
