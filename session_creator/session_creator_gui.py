@@ -1,11 +1,18 @@
 import PySimpleGUI as sg
 from session_creator import main, get_files
+from process import create_wavefile_objects
 import settings as st
 from user_input import UserInput
 import string
 
 # Create GUI:
 sg.theme('DarkAmber')   # Add a touch of color
+
+audio_table = sg.Table([[" " for col in range(3)] for row in range(10)],
+    headings=["Filename", "Bitrate", "Samplerate", "Channels"], size=(54, 10),
+    num_rows=10, col_widths=[22, 6, 9, 8], auto_size_columns=False, 
+    key="_wav_data_display_", justification='left')
+
 layout = [
     # Row 1 - text
     [sg.Text('Select input file:', size=(55, 1), justification='center'), 
@@ -30,7 +37,7 @@ layout = [
     # Row 4 - file display
     [sg.Listbox(values="", size=(54, 10), key="_file_list_"), 
      sg.VerticalSeparator(), 
-     sg.Listbox(values="", size=(54, 10), key="_wav_files_")],
+     audio_table],
     # Row 5 - Distance and output file
     [sg.Text('Distance between files (in multiples of length):'),
      sg.I(default_text='2', size=(3, None), key='_distance_'),  sg.Text(" "*22),
@@ -79,11 +86,14 @@ while True:
     if event == 'Check':
         user_input = read_data()
         files_to_load, wav_files, good_files = get_files(user_input)
+        wave_data = create_wavefile_objects(wav_files, wav_files, 
+                                            user_input.audio_directory)
+        wav_data = [[wav.filename, wav.bitrate, wav.samplerate, wav.nchannels] 
+                     for wav in wave_data]
+
         window['_file_list_'].update(files_to_load)
-        window['_wav_files_'].update(wav_files)
+        window['_wav_data_display_'].update(wav_data)
         
-
-
     if event == 'Generate':
         user_input = read_data()
         
