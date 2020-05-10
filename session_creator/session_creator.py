@@ -12,21 +12,9 @@ from user_input import UserInput
 
 def main(user_input):
 
-    if user_input.list_file_type == 'text':
-        files_to_load = import_list_of_files(user_input.list_file_path)
-    elif user_input.list_file_type == 'spreadsheet':
-        files_to_load = get_filenames_from_excel_column(user_input)
+    files_to_load, wav_files, good_files = get_files(user_input)
 
-    # get the filenames from directory
-    all_files, wav_files = get_all_and_wave_filenames_from_directory(
-                                        user_input.audio_directory)
-
-    """Process and analyze"""
-
-    # compare text list and real files and print results
-    good_files, extra_files, files_not_present = \
-        compare_list_and_wave_files_in_directory(
-            files_to_load, wav_files, user_input.audio_directory)
+    """Create and inspect wavefiles"""
 
     # create wavefile objects from the good files and create dummies
     wavefiles = create_wavefile_objects(files_to_load, good_files,
@@ -45,6 +33,27 @@ def main(user_input):
 
 
     return project
+
+
+def get_files(user_input):
+
+    if user_input.list_file_type == 'text':
+        files_to_load = import_list_of_files(user_input.list_file_path)
+    elif user_input.list_file_type == 'spreadsheet':
+        files_to_load = get_filenames_from_excel_column(user_input)
+
+    # get the filenames from directory
+    all_files, wav_files = get_all_and_wave_filenames_from_directory(
+                                        user_input.audio_directory)
+
+
+    # compare text list and real files and print results
+    good_files, extra_files, files_not_present = \
+        compare_list_and_wave_files_in_directory(
+            files_to_load, wav_files, user_input.audio_directory)
+
+    
+    return files_to_load, wav_files, good_files
 
 
 # For CLI use

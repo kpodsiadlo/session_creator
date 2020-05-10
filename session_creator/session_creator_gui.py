@@ -1,39 +1,62 @@
 import PySimpleGUI as sg
-from session_creator import main
+from session_creator import main, get_files
 import settings as st
 from user_input import UserInput
 import string
 
 # Create GUI:
 sg.theme('DarkAmber')   # Add a touch of color
-layout = [[sg.Text('Select input file:')],
-          [sg.Input(key='_input_file_',
-           default_text=st.gui_default_input_path),
-           sg.FileBrowse()],
-          [sg.Text('Select spreadsheet range (for Excel files):')],
-          [sg.T('Column:'),
-           sg.I(default_text="C", size=(2, None), key='_column_', 
-           enable_events=True),
-           sg.T('First Row:'),
-           sg.I(default_text='5', size=(4, None), key='_firstrow_',
-           enable_events=True),
-           sg.T('Last Row:'),
-           sg.I(default_text='8', size=(4, None), key='_lastrow_',
-           enable_events=True)],
-          [sg.Text('Adjust distance between files (in multiples of length):'),
-           sg.I(default_text='2', size=(3, None), key='_distance_')],
-          [sg.Text('Select audio folder:')],
-          [sg.Input(key='_folder_',
-           default_text=st.gui_default_audio_folder),
-           sg.FolderBrowse()],
-          [sg.Text('Select output file::')],
-          [sg.Input(key='_output_file_',
-           default_text=st.gui_default_output_path),
-          sg.FileSaveAs(
-              file_types=(('ALL Files', '*.*'), ('Reaper project', '*.RPP')))],
-          [sg.T(' '*25), sg.B(button_text='Check files'), 
-           sg.B(button_text='Generate')]
-          ]
+layout = [
+    # Row 1 - text
+    [sg.Text('Select input file:', size=(55, 1), justification='center'), 
+     sg.VSep(),
+     sg.Text('Select audio folder:', size=(55, 1), justification='center')],
+    # Row 2 - file input
+    [sg.Input(key='_input_file_',default_text=st.gui_default_input_path),
+     sg.FileBrowse(), sg.VSep(), 
+     sg.Input(key='_folder_', default_text=st.gui_default_audio_folder),
+     sg.FolderBrowse()],
+    # Row 3 - range
+    [sg.Text(" "*20), sg.Text('Select spreadsheet range (for Excel files):')],
+    [sg.T(" "*10), sg.T('Column:'),
+     sg.I(default_text="C", size=(2, None), key='_column_', 
+             enable_events=True),
+     sg.T('First Row:'),
+     sg.I(default_text='5', size=(4, None), key='_firstrow_',
+             enable_events=True),
+     sg.T('Last Row:'),
+     sg.I(default_text='8', size=(4, None), key='_lastrow_',
+            enable_events=True)],
+    # Row 4 - file display
+    [sg.Listbox(values="", size=(54, 10), key="_file_list_"), 
+     sg.VerticalSeparator(), 
+     sg.Listbox(values="", size=(54, 10), key="_wav_files_")],
+    # Row 5 - Distance and output file
+    [sg.Text('Distance between files (in multiples of length):'),
+     sg.I(default_text='2', size=(3, None), key='_distance_'),  sg.Text(" "*22),
+     sg.Text('Output file:'),
+     sg.Input(key='_output_file_', size=(30, 1),
+    default_text=st.gui_default_output_path),
+     sg.FileSaveAs(
+        file_types=(('ALL Files', '*.*'), ('Reaper project', '*.RPP')))],
+    # Row 6 - Generate
+    [sg.T("", size=(45, 1)), sg.B(button_text='Check'), 
+     sg.B(button_text='Generate')]
+    ]
+
+def read_data():
+    list_file_path = values['_input_file_']
+    output_file_path = values['_output_file_']
+    directory = values['_folder_']
+    distance_multiplier = values['_distance_']
+    column = values['_column_']
+    row_range = (values['_firstrow_'], values['_lastrow_'])
+
+    user_input = UserInput(list_file_path, output_file_path, directory,
+                        distance_multiplier, column, row_range)
+
+    return user_input
+
 
 # Create the Window
 window = sg.Window('DAW Session Creator', layout)
@@ -53,18 +76,17 @@ while True:
                     values[event][-1] not in string.digits):
         window[event].update(values[event][:-1])
 
+    if event == 'Check':
+        user_input = read_data()
+        files_to_load, wav_files, good_files = get_files(user_input)
+        window['_file_list_'].update(files_to_load)
+        window['_wav_files_'].update(wav_files)
+        
+
 
     if event == 'Generate':
-        # Get data from the user input
-        list_file_path = values['_input_file_']
-        output_file_path = values['_output_file_']
-        directory = values['_folder_']
-        distance_multiplier = values['_distance_']
-        column = values['_column_']
-        row_range = (values['_firstrow_'], values['_lastrow_'])
-
-        user_input = UserInput(list_file_path, output_file_path, directory,
-                           distance_multiplier, column, row_range)
+        user_input = read_data()
+        
 
         if user_input.errors:
             print(f"User input: {user_input.errors}")
