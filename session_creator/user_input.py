@@ -2,6 +2,7 @@ import os
 import settings as st
 
 class UserInput():
+    """Self-validating class containing all parameters give by the user"""
 
     def __init__(self, list_file_path="", output_file_path="", 
     audio_directory="", distance_multiplier=2, column="", 
@@ -16,10 +17,10 @@ class UserInput():
         self.distance_multiplier = \
                         self.validate_distance_multiplier(distance_multiplier)
         if self.list_file_type == "spreadsheet":
-        #    self.column, self.start_row, self.last_row = \
-        #    self.validate_excel_range(column, row_range)
-            self.column, self.start_row, self.lastrow = \
-                column, row_range[0], row_range[1]
+            self.column, self.start_row, self.last_row = \
+            self.validate_excel_range(column, row_range)
+
+
     def validate_list_file(self, list_file_path):
 
         if os.path.isfile(list_file_path):
@@ -36,8 +37,8 @@ class UserInput():
         extension = os.path.splitext(list_file_path)[1].lower()
         if not any(extension in st.input_formats[ext_type]
                    for ext_type in st.input_formats):
-                self.errors.append("Unknown input file type.")
-                list_file_type = None
+            self.errors.append("Unknown input file type.")
+            list_file_type = None
         else:
             for known_type in st.input_formats:
                 for known_extension in st.input_formats[known_type]:
@@ -83,8 +84,7 @@ class UserInput():
         except ValueError:
             self.errors.append("Invalid distance value.")
         except TypeError:
-            self.errors.append("Coś sie zjebało")
-            print(f"Co jest kurwa?, {distance_multiplier}")
+            self.errors.append("Input error.")
         return distance_multiplier
 
 
@@ -93,32 +93,32 @@ class UserInput():
         try:
             if not column.isalpha():
                  # check is column is a letter
-                self.errors.append('Column_ID_invalid') 
+                self.errors.append('Invalid column letter.') 
         except AttributeError:
-            self.errors.append("Column_ID_missing")
+            self.errors.append("Column letter missing.")
 
         column = column.lower()
 
         try:  # check if start...
             row_start = int(row_range[0])
         except TypeError:
-            self.errors.append("Start_row_missing")
+            self.errors.append("Start row missing")
             row_start = None
         except ValueError:
-            self.errors.append("Start_row_invalid")
+            self.errors.append("Start row invalid")
             row_start = None
 
         try:  # ...and stop rows are valid
             row_stop = int(row_range[1])
         except TypeError:
-            self.errors.append("Stop_row_missing")
+            self.errors.append("Stop row missing")
             row_stop = None
         except ValueError:
-            self.errors.append("Stop_row_invalid")
+            self.errors.append("Stop row invalid")
             row_stop = None
 
         if row_start and row_stop:
             if row_stop < row_start:
-                self.errors.append("Stop_row_larger_than_start_row")
+                self.errors.append("Stop row larger than start row")
 
         return column, row_start, row_stop

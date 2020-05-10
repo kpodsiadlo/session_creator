@@ -83,7 +83,7 @@
   >
   <PROJBAY
   >
-  <TRACK {F8A5A07D-2918-4B22-B853-7CD13BBE69A0}
+  <TRACK {33A77C87-ABAE-48D9-9224-445CE43FA0E7}
     NAME ""
     PEAKCOL 16576
     BEAT 0
@@ -103,7 +103,7 @@
     INQ 0 0 0 0.5 100 0 0 100
     NCHAN 2
     FX 1
-    TRACKID {F8A5A07D-2918-4B22-B853-7CD13BBE69A0}
+    TRACKID {33A77C87-ABAE-48D9-9224-445CE43FA0E7}
     PERF 0
     MIDIOUT -1
     MAINSEND 1 0
@@ -116,21 +116,21 @@
           FADEOUT 1 0.01 0 1 0 0
           MUTE 0
           SEL 1
-          IGUID {2956B12B-56FD-4E3B-8655-94BA6CE371B8}
+          IGUID {F52187E2-FF49-4E73-BB5B-A3081F427CB0}
           IID 1
           NAME selfiu.wav
           VOLPAN 1 0 1 -1
           SOFFS 0
           PLAYRATE 1 1 0 -1 0 0.0025
           CHANMODE 0
-          GUID {B4CDAAF6-2FD0-4C72-A7B3-A0D47C9FE98F}]
+          GUID {A76F8156-058D-4CEC-AA9B-DCAD30EE6AC3}]
           RECPASS 1
           <SOURCE WAVE
            FILE "selfiu.wav"
           >
     >
     <ITEM
-          POSITION 15.535646258503402          SNAPOFFS 0
+          POSITION 20.380861678004536          SNAPOFFS 0
           LENGTH 3
           LOOP 1
           ALLTAKES 0
@@ -138,21 +138,21 @@
           FADEOUT 1 0.01 0 1 0 0
           MUTE 0
           SEL 1
-          IGUID {EBA1DD56-7A00-4359-8FCC-D52C51A5B272}
+          IGUID {56D1FFED-61F7-478F-99D3-63EC7613F0C6}
           IID 1
           NAME skrzynka.wav
           VOLPAN 1 0 1 -1
           SOFFS 0
           PLAYRATE 1 1 0 -1 0 0.0025
           CHANMODE 0
-          GUID {BCDEAF12-42EC-42CF-A53A-8776BA0930D5}]
+          GUID {4A680A95-09D6-4F34-8DFE-314E1443A0A3}]
           RECPASS 1
           <SOURCE WAVE
            FILE "skrzynka.wav"
           >
     >
     <ITEM
-          POSITION 24.5356462585034          SNAPOFFS 0
+          POSITION 32.380861678004536          SNAPOFFS 0
           LENGTH 2.493854875283447
           LOOP 1
           ALLTAKES 0
@@ -160,21 +160,21 @@
           FADEOUT 1 0.01 0 1 0 0
           MUTE 0
           SEL 1
-          IGUID {8A13836D-CEC0-459C-9A53-56DA51773278}
+          IGUID {BEB6931A-E739-4403-8AB0-561E4D18F1A1}
           IID 1
           NAME 01-200424_0739-01.wav
           VOLPAN 1 0 1 -1
           SOFFS 0
           PLAYRATE 1 1 0 -1 0 0.0025
           CHANMODE 0
-          GUID {8693EDF7-F76C-40F9-90D7-5F46DF9B258A}]
+          GUID {79C3F674-9CA1-45F6-AD0B-5B1F5FF330D4}]
           RECPASS 1
           <SOURCE WAVE
            FILE "01-200424_0739-01.wav"
           >
     >
     <ITEM
-          POSITION 32.017210884353744          SNAPOFFS 0
+          POSITION 42.35628117913832          SNAPOFFS 0
           LENGTH 2.6038321995464853
           LOOP 1
           ALLTAKES 0
@@ -182,21 +182,21 @@
           FADEOUT 1 0.01 0 1 0 0
           MUTE 0
           SEL 1
-          IGUID {43164611-16BE-44E8-B866-69E3B42B55E6}
+          IGUID {8D6A4BA7-55D8-420B-8BE0-35A7E8E5D905}
           IID 1
           NAME dasd.wav
           VOLPAN 1 0 1 -1
           SOFFS 0
           PLAYRATE 1 1 0 -1 0 0.0025
           CHANMODE 0
-          GUID {2657AAE8-B486-4C28-9DBA-D4DA4235FE88}]
+          GUID {29BCA3F8-EE28-4839-ACDD-79E7E5E4A4EF}]
           RECPASS 1
           <SOURCE WAVE
            FILE "dasd.wav"
           >
     >
     <ITEM
-          POSITION 39.8287074829932          SNAPOFFS 0
+          POSITION 52.77160997732426          SNAPOFFS 0
           LENGTH 3.740657596371882
           LOOP 1
           ALLTAKES 0
@@ -204,39 +204,17 @@
           FADEOUT 1 0.01 0 1 0 0
           MUTE 0
           SEL 1
-          IGUID {B2EBE635-1BF1-4770-BFEB-C64E79297E22}
+          IGUID {8A8B0CAD-A3AD-4214-8076-7F74AB06C893}
           IID 1
           NAME weefou.wav
           VOLPAN 1 0 1 -1
           SOFFS 0
           PLAYRATE 1 1 0 -1 0 0.0025
           CHANMODE 0
-          GUID {A7756AB5-6606-48FD-9A57-617FE4073026}]
+          GUID {BE7A265B-1E25-4756-AA09-63FD0DE7DB5E}]
           RECPASS 1
           <SOURCE WAVE
            FILE "weefou.wav"
-          >
-    >
-    <ITEM
-          POSITION 51.05068027210885          SNAPOFFS 0
-          LENGTH 4.789319727891156
-          LOOP 1
-          ALLTAKES 0
-          FADEIN 1 0.01 0 1 0 0
-          FADEOUT 1 0.01 0 1 0 0
-          MUTE 0
-          SEL 1
-          IGUID {0563BF52-B6CE-4457-AD86-B81DDFDC482E}
-          IID 1
-          NAME 01-200424_0739-02.wav
-          VOLPAN 1 0 1 -1
-          SOFFS 0
-          PLAYRATE 1 1 0 -1 0 0.0025
-          CHANMODE 0
-          GUID {BCC82EEA-2D5D-4CC2-A6E9-7AAC1C8499DE}]
-          RECPASS 1
-          <SOURCE WAVE
-           FILE "01-200424_0739-02.wav"
           >
     >
 >

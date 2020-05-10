@@ -3,7 +3,7 @@ import unittest
 from input_functions import *
 
 
-class test_get_column_and_cells(unittest.TestCase):
+class TestGetColumnAndCells(unittest.TestCase):
 
     def test_valid_value(self):
         self.assertEqual(get_column_and_cells('A23:150'), ('a', ('23', '150')))
@@ -17,7 +17,7 @@ class test_get_column_and_cells(unittest.TestCase):
             get_column_and_cells('stefan')
 
 
-class test_parse_cli_arguments(unittest.TestCase):
+class TestParseCliArguments(unittest.TestCase):
 
     def test_parses_valid_input_excel(self):
 

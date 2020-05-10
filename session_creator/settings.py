@@ -1,4 +1,4 @@
-input_formats = {'text':  '.txt',
+input_formats = {'text':  ['.txt'],
                  'spreadsheet': ['.xls', '.xlsx']}
 output_formats = {'.rpp': "Reaper"}
 dummy_length = 3  # seconds
