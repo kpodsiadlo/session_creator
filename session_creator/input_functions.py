@@ -9,7 +9,6 @@ import settings as st
 
 
 def parse_cli_arguments(arguments):  # CLI ONLY
-
     """Parse arguments given to the script.
     Return list of files to load, name of target project and directory with
     the audio files"""

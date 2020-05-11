@@ -1,25 +1,25 @@
 import os
 import settings as st
 
+
 class UserInput():
     """Self-validating class containing all parameters give by the user"""
 
-    def __init__(self, list_file_path="", output_file_path="", 
-    audio_directory="", distance_multiplier=2, column="", 
-    row_range=(None, None)):
+    def __init__(self, list_file_path="", output_file_path="",
+                 audio_directory="", distance_multiplier=2, column="",
+                 row_range=(None, None)):
 
         self.errors = []
         self.list_file_path, self.list_file_type = self.validate_list_file(
-                                                                list_file_path)
+            list_file_path)
         self.output_file_path, self.output_file_type = \
-                               self.validate_output_file(output_file_path)
+            self.validate_output_file(output_file_path)
         self.audio_directory = self.validate_directory(audio_directory)
         self.distance_multiplier = \
-                        self.validate_distance_multiplier(distance_multiplier)
+            self.validate_distance_multiplier(distance_multiplier)
         if self.list_file_type == "spreadsheet":
             self.column, self.start_row, self.last_row = \
-            self.validate_excel_range(column, row_range)
-
+                self.validate_excel_range(column, row_range)
 
     def validate_list_file(self, list_file_path):
 
@@ -30,7 +30,6 @@ class UserInput():
             list_file_type = None
 
         return list_file_path, list_file_type
-
 
     def get_list_file_type(self, list_file_path):
 
@@ -47,7 +46,6 @@ class UserInput():
 
         return list_file_type
 
-
     def validate_output_file(self, output_file_path):
 
         if os.path.exists(os.path.split(output_file_path)[0]):
@@ -56,7 +54,6 @@ class UserInput():
         else:
             self.errors.append("Wrong output file path.")
             return None, None
-
 
     def validate_output_file_type(self, output_file_path):
 
@@ -67,7 +64,6 @@ class UserInput():
             self.errors.append("Unsupported output file format.")
             return None
 
-    
     def validate_directory(self, audio_directory):
 
         if os.path.exists(audio_directory):
@@ -75,7 +71,6 @@ class UserInput():
         else:
             self.errors.append("Invalid audio directory path.")
             return None
-
 
     def validate_distance_multiplier(self, distance_multiplier):
 
@@ -87,13 +82,12 @@ class UserInput():
             self.errors.append("Input error.")
         return distance_multiplier
 
-
     def validate_excel_range(self, column, row_range):
 
         try:
             if not column.isalpha():
-                 # check is column is a letter
-                self.errors.append('Invalid column letter.') 
+                # check is column is a letter
+                self.errors.append('Invalid column letter.')
         except AttributeError:
             self.errors.append("Column letter missing.")
 

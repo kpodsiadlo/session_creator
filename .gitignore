@@ -6,3 +6,4 @@ todo.txt
 venv
 session_creator.code-workspace
 tests/test_gui.RPP
+session_creator/tests/test_gui.RPP
